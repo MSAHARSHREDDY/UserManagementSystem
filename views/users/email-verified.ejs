@@ -1,0 +1,20 @@
+<%-include("../layouts/header.ejs")-%>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-sm-6 m-auto">
+                
+                <form method="post" action="/otpVerify">
+                    <div class="mb-3">
+                        <label>OTP</label>
+                        <input type="text" name="otp" class="form-control mt-2"  autofocus required >
+                    </div>
+                    <button type="submit" class="btn btn-success">Verify OTP</button>
+                </form>
+                
+              
+               
+
+            </div>
+        </div>
+    </div>
+<%-include("../layouts/footer.ejs")-%>

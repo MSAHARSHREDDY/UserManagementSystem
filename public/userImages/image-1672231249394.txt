@@ -1,0 +1,197 @@
+
+      "/user/degree/create": {
+        "post": {
+          "tags": [],
+          "description": "",
+          "parameters": [{
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "isActive": {
+                  "example": "any"
+                },
+                "request_id": {
+                  "example": "{{$guid}}"
+                }
+              }
+            }
+          },
+          {
+           "name": "tenant",
+          "in": "header",
+          "description": "Tenant header",
+          "required": true,
+          "type": "string"},
+          {
+            "name": "Authorization",
+           "in": "header",
+           "description": "an authorization header",
+           "required": true,
+           "type": "string"}],
+          "responses": {}
+        }
+      },
+      "/user/degree/delete": {
+        "delete": {
+          "tags": [],
+          "description": "",
+          "parameters": [{
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "properties": {
+                "degree_type_id": {
+                  "example": "any"
+                },
+                "request_id": {
+                  "example": "{{$guid}}"
+                }
+              }
+            }
+          },
+          {
+           "name": "tenant",
+          "in": "header",
+          "description": "Tenant header",
+          "required": true,
+          "type": "string"},
+          {
+            "name": "Authorization",
+           "in": "header",
+           "description": "an authorization header",
+           "required": true,
+           "type": "string"}],
+          "responses": {}
+        }
+      },
+      "/user/degree/dropdown-list": {
+        "get": {
+          "tags": [],
+          "description": "",
+          "parameters": [{
+            "in": "query",
+            "name": "request_id",
+            "schema": {
+              "properties": {
+                "request_id": {
+                  "example": "{{$guid}}"
+                }
+              }
+            }
+          },
+          {
+           "name": "tenant",
+          "in": "header",
+          "description": "Tenant header",
+          "required": true,
+          "type": "string"},
+          {
+            "name": "Authorization",
+           "in": "header",
+           "description": "an authorization header",
+           "required": true,
+           "type": "string"}],
+          "responses": {}
+        }
+      },
+      "/user/degree/data": {
+        "get": {
+          "tags": [],
+          "description": "",
+          "parameters": [{
+            "in": "query",
+            "name": "request_id",
+            "schema": {
+              "type": "integer",
+              "description": "Random Number",
+              "example": "{{$guid}}"
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "description": "The number of items to skip before starting to collect the result set"
+            }
+          },
+          {
+            "in": "query",
+              "name": "limit",
+              "schema": {
+                "type": "integer",
+              "description": "The numbers of items to return"
+              }
+          },
+          {
+            "in": "query",
+              "name": "search",
+              "schema": {
+                "type": "object",
+              "description": "Id of the particular record"
+              }
+          },
+          {
+           "name": "tenant",
+          "in": "header",
+          "description": "Tenant header",
+          "required": true,
+          "type": "string"},
+          {
+            "name": "Authorization",
+           "in": "header",
+           "description": "an authorization header",
+           "required": true,
+           "type": "string"}],
+          "responses": {}
+        }
+      },
+      "/user/degree/update": {
+        "put": {
+          "tags": [],
+          "description": "",
+          "parameters": [{
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "properties": {
+                "degree_type_id": {
+                  "example": "any"
+                },
+                "name": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "isActive": {
+                  "example": "any"
+                },
+                "request_id": {
+                  "example": "{{$guid}}"
+                }
+              }
+            }
+          },
+          {
+           "name": "tenant",
+          "in": "header",
+          "description": "Tenant header",
+          "required": true,
+          "type": "string"},
+          {
+            "name": "Authorization",
+           "in": "header",
+           "description": "an authorization header",
+           "required": true,
+           "type": "string"}],
+          "responses": {}
+        }
+      },

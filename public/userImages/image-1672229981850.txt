@@ -1,0 +1,196 @@
+
+const degreeTypeRepository = require("../../repositories/configurations/degreeTypesRepository");
+const { responseMessages } = require('../../../../../constants/responseMessage');
+
+/**
+ * create a new object and send to repository to insert the document and return the response to controller.
+ * * @param {object} dbConnection 
+ * @param {object} body
+ * @return Json
+ * 
+
+ */
+const create = async (dbConnection, body) => {
+  try {
+     /* Creating new entry object */
+    var newDegreeType = {
+      name: body.name,
+      isActive: body.isActive,
+      description: body.description,
+      createdBy_id: body.createdBy_id
+    };
+    /* Creating new entry object */
+
+    /* calling create method in repository to create a new entry*/
+    var repositoryResponse = await degreeTypeRepository.create(dbConnection, newDegreeType);
+    return repositoryResponse;
+  } catch (error) {  
+    return { status: false, message :responseMessages.common.failedToCreate, error: error.stack }
+  }
+   /* calling create method in repository to create a new entry*/
+};
+
+/**
+ * delete function.
+ * @param {object} dbConnection 
+ * @param {object} body
+ * @return Json
+ * 
+ */
+ const deleteDegreeType = async (dbConnection, body) => {
+  try {
+
+    var condition = { _id: body.degree_type_id }
+    var updateData = {
+      isActive : 0,
+      deletedAt : new Date(),
+      updatedBy_id : body.updatedBy_id
+    };
+     /* calling update method in repository to create a new entry*/
+    var repositoryResponse = await degreeTypeRepository.update(dbConnection, condition, updateData);
+    return repositoryResponse;
+  } catch (error) {
+    return { status: false, message : responseMessages.common.failedToUpdate, error: error.stack }
+  }
+    /* calling update method in repository to create a new entry*/
+};
+
+/**
+ * Prepare dropdown for the country
+ * 
+ * @param {object} dbConnection 
+ * @param {object} condition 
+ * @return Json
+ * 
+ */
+const dropDownList = async (dbConnection, condition) => {
+  try {
+      /* calling findAll method in repository */
+    var user_list = await degreeTypeRepository.findAll(dbConnection, condition);
+    if (user_list.status == true) {
+
+      /* Variables */
+      var listingObject = [];
+      var responseData = [];
+      var total_details = user_list.data;
+      /* Variables */
+
+      /**
+       * Using Map to return the required response.
+       */
+      listingData = await total_details.map(async (item) => {
+        listingObject = {
+          id : item._id,
+          name : item.name
+        };
+        return listingObject;
+      });
+      responseData = await Promise.all(listingData); //using promise to wait till the map function completes.
+      return { status: true, data: responseData };
+    } else {
+      return user_list;
+    }
+  } catch (error) {
+    return { success: false,  message: responseMessages.common.failedToFetch, error: error.stack }
+  }
+   /* calling findAll method in repository */
+};
+
+/**
+ * Prepare findOne for the country
+ * 
+ * @param {object} dbConnection 
+ * @param {object} condition 
+ * @return Json
+ * 
+ */
+ const findOne = async (dbConnection, condition) => {
+  try {
+      /* calling findOne method in repository*/
+      var degree_type_list = await degreeTypeRepository.findOne(dbConnection, condition); 
+      return degree_type_list;
+  } catch (error) {
+      return { status: false,  message: responseMessages.common.failedToFetch, error: error.stack }
+  }
+   /* calling findOne method in repository*/
+};
+
+
+/**
+ * Prepare the listing details.
+ * 
+ * @param {object} dbConnection 
+ * @param {object} condition 
+ * @return Json
+ * 
+ */
+ const listing = async (dbConnection, condition) => {
+  try {
+       /* calling findall method in repository to listing a new entry*/
+    var user_list = await degreeTypeRepository.findAll(dbConnection, condition);
+    if (user_list.status == true) {
+
+      /* Variables */
+      var listingObject = [];
+      var responseData = [];
+      var total_details = user_list.data;
+      /* Variables */
+
+      /**
+       * Using Map to return the required response.
+       */
+       var serial_no = 1 ;
+      listingData = await total_details.map(async (item) => {
+        listingObject = {
+          serial_no : serial_no,
+          id: item._id,
+          name: item.name,
+          description: item.description,
+          isActive: item.isActive
+        };
+        serial_no++;
+        return listingObject;
+      });
+      responseData = await Promise.all(listingData); //using promise to wait till the map function completes.
+      return { status: true, data: responseData };
+    } else {
+      return user_list;
+    }
+  } catch (error) {
+    return { success: false,  message: responseMessages.common.failedToFetch, error: error.stack }
+  }
+    /* calling findall method in repository to listing a new entry*/
+};
+
+
+
+/**
+ * Prepare update for the country
+ * 
+ * @param {object} dbConnection 
+ * @param {object} condition 
+ * @return Json
+ * 
+ */
+const update = async (dbConnection, body) => {
+  try {
+       /*updating new entry object */
+    var condition = { _id: body.degree_type_id }
+    var updateData = {
+      name: body.name,
+      isActive: body.isActive,
+      description: body.description,
+      updatedBy_id : body.updatedBy_id
+    };
+      /*updating new entry object */
+
+    /* calling update method in repository to update a new entry*/
+    let repositoryResponse = await degreeTypeRepository.update(dbConnection, condition, updateData);
+    return repositoryResponse;
+  } catch (error) {
+    return { status: false, message : responseMessages.failed_to_update, error: error.stack }
+  }
+  /* calling update method in repository to update a new entry*/
+};
+
+module.exports = { create,  deleteDegreeType,dropDownList,findOne, listing,  update};

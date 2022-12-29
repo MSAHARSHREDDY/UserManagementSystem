@@ -1,0 +1,105 @@
+{
+  "_id": {
+    "$oid": "63983fd50fe552f14c6c6401"
+  },
+  "firstName": "dileep",
+  "middleName": null,
+  "lastName": "t",
+  "displayName": "dileep  t",
+  "profileId": {
+    "$oid": "63981ef170ffe9045a72cff6"
+  },
+  "dob": {
+    "$date": {
+      "$numberLong": "1592438400000"
+    }
+  },
+  "contactNumber": "8416374185",
+  "alternateContactNumber": "9949503205",
+  "emailID": "dileep@codetru.com",
+  "alternateEmailID": "vinay@codetrugmail.com",
+  "gender": "male",
+  "employeeReferenceID": "EMPID1129",
+  "isEmployeeUSCitizen": false,
+  "visaTypeId": {
+    "$oid": "638eceb50abf571229f674b0"
+  },
+  "referralTeam": "Internal",
+  "referralId": {
+    "$oid": "63898bd8407364d344c80592"
+  },
+  "referralName": "Hemanth",
+  "ssn": "ssn1347",
+  "dateOfJoining": {
+    "$date": {
+      "$numberLong": "1592438400000"
+    }
+  },
+  "reportingManagerId": null,
+  "isTenantOwner": false,
+  "roleId": {
+    "$oid": "638ce9cba7b5b9699b896261"
+  },
+  "departmentId": {
+    "$oid": "638ce9cba7b5b9699b896261"
+  },
+  "employmentTypeId": {
+    "$oid": "63982d8f265777671a2c3c99"
+  },
+  "employeeCategoryId": {
+    "$oid": "639831d473ab2d6fa2e5efe1"
+  },
+  "password": "$2a$10$dtXPAu/vXkMO0AtNVm6aQe6RBMj8odMxAn8WSsT3PnQF6U/z0Ld5i",
+  "oldPasswords": [],
+  "otp": 0,
+  "otpVerified": false,
+  "addressDetails": [
+    {
+      "addressLine1": "2nd floor codetru",
+      "addressLine2": "manikonda",
+      "city": "hyderabad",
+      "stateId": {
+        "$oid": "6389dea9087c4305ffc7639d"
+      },
+      "countryId": {
+        "$oid": "6389d9331dc5140d9cfeae88"
+      },
+      "zipCode": 500081,
+      "deletedAt": null,
+      "_id": {
+        "$oid": "63983fd50fe552f14c6c6402"
+      }
+    }
+  ],
+  "isPasswordChange": false,
+  "isSuperAdmin": true,
+  "isEnableLogin": true,
+  "isActive": true,
+  "onBoardingType": 2,
+  "onBoardingStage": 1,
+  "isLogin": true,
+  "failedLoginAttempts": 0,
+  "accessToken": null,
+  "refreshToken": null,
+  "createdById": {
+    "$oid": "63898bd8407364d344c80592"
+  },
+  "updatedById": null,
+  "deletedAt": null,
+  "lastLogin": {
+    "$date": {
+      "$numberLong": "1670922197736"
+    }
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670922197742"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670922197742"
+    }
+  },
+  "__v": 0
+}

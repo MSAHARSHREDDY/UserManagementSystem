@@ -1,0 +1,72 @@
+/**
+ * Funtion to get the employee listing details
+ *
+ * @param req object.
+ * @param res object.
+ * @return Json
+ */
+const listingEmployees =tryCatch(
+  async (req, res) =>{
+    logRequest('info', req, "Getting all employee details");  // Log the request
+    var dbConnection = await getConnection();  //Getting Tenant DB connection
+    var responseData = '';
+    var validIDCheck = 1;
+    var requestId = req.query.requestId;
+    if (requestId != undefined && requestId != '') {
+
+     /* Default Variable */
+     var employeeId = req.query.id;
+     let limit = (req.query.limit) ? (req.query.limit) : pagination.limit;
+     let page = (req.query.page) ? (req.query.page)  : pagination.page ;
+     let search = req.query.search ? req.query.search : "";
+     /* Default Variable */
+
+      if (employeeId != undefined && employeeId != '') {
+        var condition = { _id : employeeId, deletedAt : null, isTenantOwner : false,"$or":[
+          {"displayName":{$regex:search,$options:"i"}},
+           {"emailID":{$regex:search,$options:"i"}},  
+           {"gender":{$regex:search,$options:"i"}},
+          // {"employeeTypesData.name":{$regex:search,$options:"i"}},   
+      ]};
+        var employeeData = await employeeService.findOne(dbConnection, condition);
+        if (!employeeData.status) {
+          validIDCheck = 0
+        }
+      } else {
+        var condition = { deletedAt : null, isTenantOwner : false,"$or":[
+          {"displayName":{$regex:search,$options:"i"}},
+         {"emailID":{$regex:search,$options:"i"}},   
+          {"gender":{$regex:search,$options:"i"}}, 
+          //{"employeeTypesData.name":{$regex:search,$options:"i"}},
+      ]}  ;
+      }
+
+      /* Writing validation rules to the input request */
+ 
+        /**
+            * If validation is success
+            *    + All the department type details will be fetch based on the condition.
+            * If Validation Fails
+            *    + Return the error message.
+        */
+        if( validIDCheck == 1 ) {
+          var serviceResponse = await employeeService.listing(dbConnection, condition,page,limit);  
+          if(serviceResponse.status == true){
+          responseData = { statusCode: responseCodes.codeSuccess, message: responseMessages.common.success, data: serviceResponse.data,paginationData:serviceResponse.pagination_data};  
+          } else {
+          responseData = { statusCode: responseCodes.codeInternalError, message: serviceResponse.message, message:responseMessages.common.noRecordFound,data:[] }  
+          }
+         
+          /* Log Response */
+          logResponse('info', req, responseData, "Getting department Type Details Response");
+          /* Log Response */
+         
+          /* Return the response */
+          responseHandler(res, responseData);
+          /* Return the response */
+        }
+  } else {
+      throw new InvalidRequestError(responseMessages.common.requestIdRequired, responseCodes.codeUnprocessableEntity);
+  }
+}
+);
