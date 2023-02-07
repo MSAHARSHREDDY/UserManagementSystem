@@ -6,7 +6,7 @@ const {verifyOtp, forgotPassword, resetPassword, userRegister, userLogin, userPr
 const userRouter=express.Router()
 
 
-/*-----------------refer to stubborn developers for file upload---------*/
+
 //diskStorage is used to store files in the system
 const storage=multer.diskStorage({
     destination:function(req,file,callback){
@@ -20,7 +20,7 @@ const storage=multer.diskStorage({
     }
 })
 const upload=multer({storage:storage})
-/*-----------------refer to stubborn developers for file upload---------*/ 
+
 
 
 userRouter.post("/userRegister", upload.single("image"), userRegister)
